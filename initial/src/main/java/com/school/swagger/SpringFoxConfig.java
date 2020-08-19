@@ -1,4 +1,4 @@
-package com.example.accessingdatamysql;
+package com.school.swagger;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

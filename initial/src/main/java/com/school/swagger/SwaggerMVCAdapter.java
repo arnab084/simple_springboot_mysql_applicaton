@@ -1,4 +1,4 @@
-package com.example.accessingdatamysql;
+package com.school.swagger;
 
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
