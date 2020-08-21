@@ -1,9 +1,11 @@
 package com.school.users;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
-
+@CrossOrigin(origins = "http://localhost:4200")
 @Controller 
 @RequestMapping(path="/user") 
 public class UserController {
@@ -28,6 +30,7 @@ public class UserController {
 		try {
 			userService.usernameExists(userName);
 			userService.emailExists(email);
+			userService.phoneExists(phone);
 			userService.addNewUser(firstName, lastName, userName, password, email, address, phone);
 		} catch(UserException e) {
 			return e.getMessage();
@@ -39,15 +42,17 @@ public class UserController {
 	  }
 	  
 	  @PostMapping(path="/login") 
-	  public @ResponseBody User login (@RequestParam String username, @RequestParam String password) {
-		  User objUser = null;
-	    try {
-	    	objUser = userService.login(username, password);
-	    	userService.addAutenticationToken(objUser);
-		} catch (UserException e) {
-			return null;
-		}
+	  public @ResponseBody Object login (@RequestParam String username, @RequestParam String password) throws UserException{
+  		User objUser = userService.login(username, password);
+    	userService.addAutenticationToken(objUser);
+		
 	    return objUser;
+	  }
+	  
+	  @GetMapping(path="/getAllUsers") 
+	  public @ResponseBody Iterable<User> getAllUsers () {
+		Iterable<User> objUserList = userService.getAllUsers();
+	    return objUserList;
 	  }
 
 }

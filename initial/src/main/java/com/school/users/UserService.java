@@ -1,12 +1,12 @@
 package com.school.users;
 
-import java.nio.charset.Charset;
 import java.util.List;
-import java.util.Random;
-import java.util.stream.IntStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.school.utility.CommonUtility;
+
 
 @Service
 public class UserService {
@@ -31,6 +31,16 @@ public class UserService {
 		return false;
 	}
 	
+	
+	public boolean phoneExists (String phone) throws UserException {
+		User objUser = userRepository.findByPhone(phone);
+		if(objUser!=null) {
+			throw new UserException("Phone Number Exists !!!");
+		}
+		return false;
+	}
+	
+	
 	public boolean emailExists (String email) throws UserException {
 		List<User> objUser = userRepository.findByEmail(email);
 		if(objUser.size()>0) {
@@ -48,28 +58,19 @@ public class UserService {
 	}
 
 	public void addAutenticationToken(User objUser) {
-		objUser.setAuthenticationToken(getRandomToken());
+		objUser.setAuthenticationToken(CommonUtility.getRandomToken());
 		userRepository.save(objUser);
 		
 	}
 	
-	
-	public String getRandomToken() {
-		
-		Random r = new Random();
-		
-		IntStream i1 = r.ints(65, 90).limit(5);
-		IntStream i2 = r.ints(48, 57).limit(5);
-		IntStream i3 = r.ints(97, 122).limit(5);
-		
-		String generatedString = IntStream.concat(IntStream.concat(i1,i2),i3).boxed().sorted((o1, o2) -> new Random().nextInt(2)-1)
-	    	      .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
-	    	      .toString();;
-	    	      
-	    return generatedString;
-		
-		
+	public Iterable<User> getAllUsers() {
+		return userRepository.findAll();
 	}
+	
+	
+	
+
+	
 	
 	
 

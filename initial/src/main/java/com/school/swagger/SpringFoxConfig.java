@@ -1,5 +1,8 @@
 package com.school.swagger;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -14,7 +17,10 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class SpringFoxConfig {                                    
     @Bean
     public Docket api() { 
-        return new Docket(DocumentationType.SWAGGER_2)  
+        Set<String> protocols = new HashSet<String>();
+        protocols.add("http");
+		return new Docket(DocumentationType.SWAGGER_2).protocols(protocols )
+//          .host("www.mydomain.com")	
           .select()                                  
           .apis(RequestHandlerSelectors.any())              
           .paths(PathSelectors.any())                          
