@@ -17,13 +17,18 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class SpringFoxConfig {                                    
     @Bean
     public Docket api() { 
-        Set<String> protocols = new HashSet<String>();
-        protocols.add("http");
-		return new Docket(DocumentationType.SWAGGER_2).protocols(protocols )
-//          .host("www.mydomain.com")	
+        
+		return new Docket(DocumentationType.SWAGGER_2)
+		  .protocols(getProtocolList())
           .select()                                  
           .apis(RequestHandlerSelectors.any())              
           .paths(PathSelectors.any())                          
           .build();                                           
+    }
+    
+    private Set<String> getProtocolList(){
+    	Set<String> protocols = new HashSet<String>();
+        protocols.add("http");
+        return protocols;
     }
 }
