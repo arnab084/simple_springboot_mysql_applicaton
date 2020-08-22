@@ -5,6 +5,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.school.users.requestbean.LoginBean;
+import com.school.users.requestbean.RegistrationBean;
+
 @Entity 
 public class User {
 	@Id
@@ -23,16 +26,32 @@ public class User {
   	public User() {
   		
   	}
+  	
+  	public User(LoginBean user) {
+		this.username = user.getUsername();
+		this.password = user.getPassword();
+	}
 
-	public User(String firstName, String lastName, String username, String password, String email, String address,
-			String phone) {
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.username = username;
-		this.password = password;
-		this.email = email;
-		this.address = address;
-		this.phone = phone;
+	public User(RegistrationBean user) {
+		this.firstName = user.getFirstName();
+		this.lastName = user.getLastName();
+		this.username = user.getUsername();
+		this.password = user.getPassword();
+		this.email = user.getEmail();
+		this.address = user.getAddress();
+		this.phone = user.getPhone();
+	}
+	
+	public void copy(User user) {
+		this.id = user.getId();
+		this.firstName = user.getFirstName();
+		this.lastName = user.getLastName();
+		this.username = user.getUsername();
+		this.password = user.getPassword();
+		this.email = user.getEmail();
+		this.address = user.getAddress();
+		this.phone = user.getPhone();
+		this.authenticationToken = user.getAuthenticationToken();
 	}
 
 	public Integer getId() {
@@ -106,13 +125,12 @@ public class User {
 	public void setAuthenticationToken(String authenticationToken) {
 		this.authenticationToken = authenticationToken;
 	}
-	
-	
-  	
-  	
-  
-	
-	  
 
-  
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", username=" + username
+				+ ", password=" + password + ", email=" + email + ", address=" + address + ", phone=" + phone
+				+ ", authenticationToken=" + authenticationToken + "]";
+	}
+
 }
