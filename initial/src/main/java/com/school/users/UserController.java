@@ -1,9 +1,6 @@
 package com.school.users;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,9 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.school.users.entity.UserLogin;
+import com.school.users.entity.UserRegistration;
 import com.school.users.requestbean.LoginBean;
 import com.school.users.requestbean.RegistrationBean;
 
@@ -29,9 +27,9 @@ public class UserController {
 	
 	
 	@PostMapping(path="/register")
-	  public @ResponseBody String register (@RequestBody RegistrationBean user) throws UserException {
+	  public @ResponseBody String register (@RequestBody UserRegistration user) throws UserException {
 			
-		userService.usernameExists(user.getUsername());
+		userService.usernameExists(user.getUserLogin().getUsername());
 		userService.emailExists(user.getEmail());
 		userService.phoneExists(user.getPhone());
 		userService.addNewUser(user);
@@ -40,21 +38,24 @@ public class UserController {
 	  }
 	  
 	  @PostMapping(path="/login") 
-	  public @ResponseBody User login (@RequestBody LoginBean user) throws UserException{
-		  	User objUser = new User(user);
-  			
-		  	userService.login(objUser);
-    		userService.addAutenticationToken(objUser);
-    		userService.removePasword(objUser);
-		  	return objUser;
+	  public @ResponseBody UserLogin login (@RequestBody LoginBean user) throws UserException{
+
+		  UserRegistration registeredUser =  userService.login(user);
+		  userService.addLoginEntryWithAuthenticationToken(registeredUser);
+		  	
+		  return registeredUser.getUserLogin();
 	  }
 	  
 	  @GetMapping(path="/getAllUsers") 
-	  public @ResponseBody Iterable<User> getAllUsers () {
-		Iterable<User> objUserList = userService.getAllUsers();
+	  public @ResponseBody Iterable<UserRegistration> getAllUsers () {
+		Iterable<UserRegistration> objUserList = userService.getAllUsers();
 	    return objUserList;
 	  }
 
 }
+
+
+
+
 
 
