@@ -24,7 +24,6 @@ public class UserLogin {
 	
   	private String username;
   	
-  	@JsonProperty(access = Access.READ_ONLY)
   	private String authenticationToken;
   	
 
@@ -32,14 +31,6 @@ public class UserLogin {
 		
 	}
 
-
-
-	public UserLogin(String username, String authenticationToken) {
-		this.username = username;
-		this.authenticationToken = authenticationToken;
-	}
-
-	
 
 	/**
 	 * @return the id
@@ -83,6 +74,7 @@ public class UserLogin {
 	/**
 	 * @param authenticationToken the authenticationToken to set
 	 */
+	
 	public void setAuthenticationToken(String authenticationToken) {
 		this.authenticationToken = authenticationToken;
 	}

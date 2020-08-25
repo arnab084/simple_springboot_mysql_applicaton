@@ -33,18 +33,6 @@ public class UserRegistration {
     private UserLogin userLogin;
   	
   	
-  	
-  	public UserRegistration(Integer id, String firstName, String lastName, String password, String email,
-			String address, String phone) {
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.password = password;
-		this.email = email;
-		this.address = address;
-		this.phone = phone;
-	}
-  	
-  	
 	public UserRegistration(){
   		
   	}
