@@ -9,8 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.school.users.requestbean.LoginBean;
-import com.school.users.requestbean.RegistrationBean;
 
 @Entity 
 @Table(name = "registration")
@@ -18,6 +18,7 @@ public class UserRegistration {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@JsonIgnore
 	private Integer id;
 
   	private String firstName;
@@ -41,28 +42,19 @@ public class UserRegistration {
 		this.email = email;
 		this.address = address;
 		this.phone = phone;
-//		this.userLogin.setUserRegistration(this);
 	}
   	
   	
 	public UserRegistration(){
   		
   	}
+	
+	
   	public UserRegistration(LoginBean user) {
 		this.userLogin.setUsername(user.getUsername());
 		this.password = user.getPassword();
 	}
 
-	public UserRegistration(RegistrationBean user) {
-		this.firstName = user.getFirstName();
-		this.lastName = user.getLastName();
-		this.userLogin.setUsername(user.getUsername());
-		this.password = user.getPassword();
-		this.email = user.getEmail();
-		this.address = user.getAddress();
-		this.phone = user.getPhone();
-	}
-  	
 	public void copy(UserRegistration user) {
 		this.id = user.getId();
 		this.firstName = user.getFirstName();

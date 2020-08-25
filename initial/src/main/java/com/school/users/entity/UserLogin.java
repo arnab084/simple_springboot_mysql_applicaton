@@ -7,6 +7,10 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
 
 
 @Entity 
@@ -15,19 +19,17 @@ public class UserLogin {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@JsonIgnore
 	private Integer id;
 	
   	private String username;
+  	
+  	@JsonProperty(access = Access.READ_ONLY)
   	private String authenticationToken;
-  	
-//  	@OneToOne(mappedBy = "userLogin")
-//    private UserRegistration userRegistration;
-  	
-  	
-  	
   	
 
 	public UserLogin() {
+		
 	}
 
 

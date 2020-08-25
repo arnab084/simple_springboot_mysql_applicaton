@@ -1,7 +1,5 @@
 package com.school.users;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -14,7 +12,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.school.users.entity.UserLogin;
 import com.school.users.entity.UserRegistration;
 import com.school.users.requestbean.LoginBean;
-import com.school.users.requestbean.RegistrationBean;
 
 
 @CrossOrigin(origins = "http://localhost:4200")
