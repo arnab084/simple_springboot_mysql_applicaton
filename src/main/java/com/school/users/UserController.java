@@ -1,6 +1,7 @@
 package com.school.users;
 
 
+import com.school.users.entity.DatabaseNames;
 import com.school.users.entity.UserLogin;
 import com.school.users.entity.UserRegistration;
 import com.school.users.requestbean.LoginBean;
@@ -22,7 +23,9 @@ public class UserController {
 	
 	@Autowired
 	private UserService userService;
-	
+
+	@Autowired
+	private DatabricksService databricksService;
 	
 	@PostMapping(path="/register")
 	  public @ResponseBody String register (@RequestBody UserRegistration user) throws UserException  {
@@ -50,6 +53,18 @@ public class UserController {
 		Iterable<UserRegistration> objUserList = userService.getAllUsers();
 	    return objUserList;
 	  }
+
+
+	@GetMapping(path="/getAllDatabases")
+	public @ResponseBody Iterable<String> getAllDatabases() throws Exception{
+		return databricksService.getAllDatabases();
+	}
+
+	@PostMapping(path="/getAllTables")
+	public @ResponseBody Iterable<String> getAllTableNames(@RequestBody String tableName) throws Exception{
+		return databricksService.getAllTableNames(tableName);
+	}
+
 
 }
 
