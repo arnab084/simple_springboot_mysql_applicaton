@@ -17,7 +17,7 @@ public class SchoolClass {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
   	private School school;
 
 	private String name;

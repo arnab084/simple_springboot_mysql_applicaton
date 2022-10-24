@@ -20,6 +20,11 @@ public class SchoolController {
 	  public @ResponseBody SchoolApi registerSchool (@RequestBody SchoolApi schoolApi) throws SchoolException {
 		return schoolService.addNewSchool(schoolApi);
 	  }
+
+	@GetMapping(path="/listSchools")
+	public @ResponseBody Iterable<SchoolApi> listSchools () {
+		return schoolService.getAllSchools();
+	}
 }
 
 

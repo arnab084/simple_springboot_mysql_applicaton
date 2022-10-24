@@ -18,9 +18,9 @@ public class User {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(unique = true)
-  	private SchoolClass school;
+  	private SchoolClass schoolClass;
 
 	private String firstName;
 
@@ -33,5 +33,9 @@ public class User {
 	private String username;
 
 	private String password;
+
+	public String getPassword(){
+		return "******";
+	}
 
 }

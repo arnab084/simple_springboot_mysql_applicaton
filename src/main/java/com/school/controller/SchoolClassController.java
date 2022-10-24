@@ -20,6 +20,11 @@ public class SchoolClassController {
 	  public @ResponseBody SchoolClass addClass (@RequestBody SchoolClass schoolClass) throws SchoolException {
 		return schoolClassService.addNewSchoolClass(schoolClass);
 	  }
+
+	@PostMapping(path="/getAllSchoolClasses")
+	public @ResponseBody Iterable<SchoolClass> getAllSchoolClasses ()  {
+		return schoolClassService.getAllSchoolClasses();
+	}
 }
 
 
