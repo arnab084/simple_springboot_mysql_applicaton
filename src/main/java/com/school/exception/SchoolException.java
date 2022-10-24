@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.school.users;
+package com.school.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  *
  */
 @ResponseStatus(code = HttpStatus.BAD_REQUEST)
-public class UserException extends Exception{
+public class SchoolException extends Exception{
 	
-	public UserException(String s) 
+	public SchoolException(String s)
     { 
         super(s); 
     } 
