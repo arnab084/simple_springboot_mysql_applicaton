@@ -18,8 +18,7 @@ public class Attendance {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(unique = true)
+	@ManyToOne()
   	private User user;
 
 	private LocalDate date;
